@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 
+import Dashboard from "./components/Dashboard";
+
 const App = () => {
     return (
         <Fragment>
-            <h1>hello world !!</h1>
+            <Dashboard />
         </Fragment>
     );
 };
