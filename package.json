@@ -2,6 +2,7 @@
   "name": "memory-card-game",
   "version": "1.0.0",
   "repository": "https://github.com/dgokul19/memory-card-game.git",
+  "homepage": "https://dgokul19.github.io/memory-game",
   "author": "Gokulan Dhatchinamoorthy <dgokul19@gmail.com>",
   "license": "MIT",
   "dependencies": {
