@@ -14,4 +14,16 @@
     --primary-color-03 : #f0a04b;
     --primary-color-04 : #183a1d;
     --primary-color-05 : #e1eedd;
+
+    --card-color-pink-light : #F8BBD0;
+    --card-color-pink-dark : #880E4F;
+    
+    --card-color-green-light : #e1eedd;
+    --card-color-green-dark : #183a1d;
+    
+    --card-color-blue-light : #e3f2fd;
+    --card-color-blue-dark : #283593;
+    
+    --card-color-yellow-light : #e6ee9c;
+    --card-color-yellow-dark : #827717;
 }

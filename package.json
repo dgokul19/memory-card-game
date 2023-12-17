@@ -5,6 +5,8 @@
   "author": "Gokulan Dhatchinamoorthy <dgokul19@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
+    "@types/react-redux": "^7.1.33",
     "node-sass": "8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

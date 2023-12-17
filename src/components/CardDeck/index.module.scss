@@ -1,6 +1,10 @@
+
+$cardWidth : 105px;
+$cardHeight: 150px;
+
 .CardContainer {
-    width: 230px;
-    height: 300px;
+    width: $cardWidth;
+    height: $cardHeight;
     background-color: transparent;
     perspective: 1000px;
     border-radius: 4px;
@@ -42,7 +46,7 @@
             height: 100%;
             -webkit-backface-visibility: hidden; /* Safari */
             backface-visibility: hidden;
-            line-height: 350px;
+            line-height: $cardHeight;
             font-size: 2rem;
             color: #008b8b;
         }
