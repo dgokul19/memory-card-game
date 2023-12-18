@@ -26,5 +26,9 @@ export const CARDS_COLOR = {
     YELLOW : {
         BG_COLOR : '#e6ee9c',
         COLOR : '#827717'
+    },
+    ORANGE : {
+        BG_COLOR : '#f0a04b',
+        COLOR : '#333'
     }
 }

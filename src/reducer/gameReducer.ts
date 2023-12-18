@@ -10,7 +10,8 @@ interface gameState {
   playerMode : String,
   activePlayer: String,
   playerName : String,
-  defaultCardsCount : Array<string>
+  defaultCardsCount : Array<string>,
+  matchedPairs : Array<string>
 }
 
 // Define the initial state using that type
@@ -19,7 +20,8 @@ const initialState: gameState = {
   playerMode: PLAYER_MODE.SINGLE_P,
   activePlayer : '',
   playerName : '',
-  defaultCardsCount : ["RED", "GREEN"]
+  defaultCardsCount : ["RED", "GREEN"],
+  matchedPairs : []
 }
 
 export const gameSlice = createSlice({

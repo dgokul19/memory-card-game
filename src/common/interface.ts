@@ -1,6 +1,8 @@
 export interface CardDeckInterface {
     value : String,
-    color : String
+    color : String,
+    isOpen : Boolean,
+    isMatched : Boolean
 }
 
 
@@ -8,5 +10,12 @@ export interface CardDeckInterface {
 // Type Declarations
 
 export type CardDeckProps = {
-    content : CardDeckInterface
+    content : CardDeckInterface,
+    updateCardAction : Function
+}
+
+export type CardStyleProps = {
+    backgroundColor? : string,
+    color? : string,
+    opacity? : string
 }
