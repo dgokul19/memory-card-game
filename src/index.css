@@ -3,11 +3,18 @@
 *,body{
     margin : 0;
     padding : 0;
-    height: 100%;
     box-sizing: border-box; 
-    font-family: 'Montserrat', sans-serif;;
+    font-family: 'Montserrat', sans-serif;
 }
-
+body{
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+#root {
+    width: 100%;
+    height: 100%;
+}
 :root{
     --primary-color-01 : #fefbe9;
     --primary-color-02 : #f6c453;

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-// import type { RootState } from '../store/store';
 
 import { PLAYER_MODE, GAME_STATUS } from "../constants";
 
@@ -11,7 +10,8 @@ interface gameState {
   activePlayer: String,
   playerName : String,
   defaultCardsCount : Array<string>,
-  matchedPairs : Array<string>
+  matchedPairs : Array<string>,
+  numberOfMoves : number
 }
 
 // Define the initial state using that type
@@ -21,7 +21,8 @@ const initialState: gameState = {
   activePlayer : '',
   playerName : '',
   defaultCardsCount : ["RED", "GREEN"],
-  matchedPairs : []
+  matchedPairs : [],
+  numberOfMoves : 0
 }
 
 export const gameSlice = createSlice({
@@ -35,10 +36,17 @@ export const gameSlice = createSlice({
     },
     updateGameStatus : (state, action: PayloadAction<string>) => {
       state.gameStatus = action.payload
+    },
+    updatePlayerMoves : (state ) => {
+        state.numberOfMoves += 1;
     }
   },
 })
 
-export const { updatePlayerMode, updateGameStatus } = gameSlice.actions
+export const { 
+  updatePlayerMoves, 
+  updatePlayerMode, 
+  updateGameStatus 
+} = gameSlice.actions
 
 export default gameSlice.reducer

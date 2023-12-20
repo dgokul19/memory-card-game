@@ -4,8 +4,9 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import CardDeck from "../CardDeck";
 
 // Utility Imports
-import { useAppSelector } from '../../hooks';
-import { GAME_STATUS, CARD_NUMBERS } from "../../constants";
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { CARD_NUMBERS } from "../../constants";
+import { updatePlayerMoves } from "../../reducer/gameReducer";
 
 // Interface 
 import { CardDeckInterface } from "../../common/interface";
@@ -13,6 +14,7 @@ import { CardDeckInterface } from "../../common/interface";
 import classes from "../../styles/game.module.scss";
 
 const GameBoxContainer = () => {
+    const dispatch = useAppDispatch();
     // State selectors
     const { gameStatus, defaultCardsCount } = useAppSelector(state => state.gameReducer);
 
@@ -77,7 +79,9 @@ const GameBoxContainer = () => {
                 });
                 setCardsList(allCards);
                 setOpenedCards([]);
+                dispatch(updatePlayerMoves());
             } else {
+                dispatch(updatePlayerMoves());
                 setTimeout(() => resetAllCardsList(), 1000);
             }
         } 
@@ -85,15 +89,11 @@ const GameBoxContainer = () => {
     };
 
     useEffect(() => {
-        if(GAME_STATUS.ACTIVE === gameStatus){
-            initializeGame();
-        }
-    },[gameStatus])
+        initializeGame();
+    },[defaultCardsCount])
 
     const renderCardsLis = () => {
-        if(gameStatus === GAME_STATUS.ACTIVE && cardsList?.length){
-            return cardsList?.map((cards, index) => <CardDeck key={index} content={cards} updateCardAction={updateTogglingCards}/>)
-        }
+        return cardsList?.map((cards, index) => <CardDeck key={index} content={cards} updateCardAction={updateTogglingCards}/>)
     };
 
     return (

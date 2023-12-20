@@ -4,7 +4,6 @@
     background-color: var(--primary-color-01);
     padding: 1rem;
     display: flex;
-    align-items: center;
     gap: 16px;
 
     .gameContainer {
@@ -17,7 +16,7 @@
 
         .cardBoxContainer {
             display: flex;
-            row-gap: 10px;
+            row-gap: 20px;
             column-gap: 20px;
             flex-wrap: wrap;
             width: 100%;
@@ -27,7 +26,7 @@
 
 // Header Element Styles
 .headerElementContainer {
-    width: 60%;
+    width: 98%;
     height: 45px;
     border-radius: 30px;
     display: flex;
