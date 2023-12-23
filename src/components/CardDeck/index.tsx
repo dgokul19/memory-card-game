@@ -29,12 +29,17 @@ const CardDeck = ({ content, updateCardAction } : CardDeckProps) => {
             }
         }
         return { backCard: cardBackStyle};
-    }, [content.isMatched, content.isOpen])
+    }, [content.isMatched, content.isOpen]);
 
+    const handleCardAction = () => {
+        if(!content.isOpen){
+            updateCardAction(content)
+        }
+    };
 
     return (
         <Fragment>
-            <div className={classes.CardContainer} onClick={() => updateCardAction(content)}>
+            <div className={classes.CardContainer} onClick={() => handleCardAction()}>
                 <div className={`${classes.flipCardInner} ${content.isOpen ? classes.flippedCardCover : ''}`}>
                     <div className={classes.flipCardFront}></div>
                     <div className={classes.flipCardBack} style={backCard}>
