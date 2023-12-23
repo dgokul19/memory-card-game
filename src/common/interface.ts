@@ -5,8 +5,6 @@ export interface CardDeckInterface {
     isMatched : Boolean
 }
 
-
-
 // Type Declarations
 
 export type CardDeckProps = {

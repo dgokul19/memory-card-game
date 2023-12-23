@@ -16,7 +16,7 @@ interface gameState {
 
 // Define the initial state using that type
 const initialState: gameState = {
-  gameStatus : GAME_STATUS.IDLE,
+  gameStatus : GAME_STATUS.ACTIVE,
   playerMode: PLAYER_MODE.SINGLE_P,
   activePlayer : '',
   playerName : '',

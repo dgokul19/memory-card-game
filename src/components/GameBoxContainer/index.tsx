@@ -2,11 +2,13 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 
 // Components
 import CardDeck from "../CardDeck";
+import WinComponent from "../WinComponent";
 
 // Utility Imports
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { CARD_NUMBERS } from "../../constants";
+import { CARD_NUMBERS, GAME_STATUS } from "../../constants";
 import { updatePlayerMoves } from "../../reducer/gameReducer";
+import { checkIsGameWin } from "../../common/helper";
 
 // Interface 
 import { CardDeckInterface } from "../../common/interface";
@@ -80,6 +82,7 @@ const GameBoxContainer = () => {
                 setCardsList(allCards);
                 setOpenedCards([]);
                 dispatch(updatePlayerMoves());
+                checkIsGameWin(allCards, dispatch);
             } else {
                 dispatch(updatePlayerMoves());
                 setTimeout(() => resetAllCardsList(), 1000);
@@ -89,8 +92,10 @@ const GameBoxContainer = () => {
     };
 
     useEffect(() => {
-        initializeGame();
-    },[defaultCardsCount])
+        if(gameStatus === GAME_STATUS.ACTIVE){
+            initializeGame();
+        }
+    },[defaultCardsCount, gameStatus])
 
     const renderCardsLis = () => {
         return cardsList?.map((cards, index) => <CardDeck key={index} content={cards} updateCardAction={updateTogglingCards}/>)
@@ -100,6 +105,7 @@ const GameBoxContainer = () => {
         <Fragment>
             <div className={classes.cardBoxContainer}>
                 {renderCardsLis()}
+                {(gameStatus === GAME_STATUS.WIN) && <WinComponent />}
             </div>
         </Fragment>
     );
