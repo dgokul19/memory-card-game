@@ -2,8 +2,7 @@ import React, { Fragment, useCallback } from "react";
 
 // Utility
 import { useAppDispatch } from "../../hooks";
-import { updateGameStatus } from "../../reducer/gameReducer";
-import { GAME_STATUS } from "../../constants";
+import { restartGamePlay } from "../../reducer/gameReducer";
 // CSS
 import classes from "../../styles/game.module.scss";
 
@@ -15,7 +14,7 @@ const WinComponent = () => {
     const dispatch = useAppDispatch();
 
     const restartGame = useCallback(() => {
-        dispatch(updateGameStatus(GAME_STATUS.ACTIVE))
+        dispatch(restartGamePlay())
     },[]);
 
     return(

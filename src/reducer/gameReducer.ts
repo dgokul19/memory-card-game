@@ -39,6 +39,10 @@ export const gameSlice = createSlice({
     },
     updatePlayerMoves : (state ) => {
         state.numberOfMoves += 1;
+    },
+    restartGamePlay: ( state ) => {
+      state.numberOfMoves = 0;
+      state.gameStatus = GAME_STATUS.ACTIVE
     }
   },
 })
@@ -46,7 +50,8 @@ export const gameSlice = createSlice({
 export const { 
   updatePlayerMoves, 
   updatePlayerMode, 
-  updateGameStatus 
+  updateGameStatus,
+  restartGamePlay
 } = gameSlice.actions
 
 export default gameSlice.reducer
