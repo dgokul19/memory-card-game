@@ -3,12 +3,12 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 // Components
 import CardDeck from "../CardDeck";
 import WinComponent from "../WinComponent";
+import PlayerIndicatorTab from "../PlayerIndicator";
 
 // Utility Imports
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { CARD_NUMBERS, GAME_STATUS } from "../../constants";
-import { updatePlayerMoves } from "../../reducer/gameReducer";
-import { checkIsGameWin } from "../../common/helper";
+import { CARD_NUMBERS, GAME_STATUS, PLAYERS_ID } from "../../constants";
+import { checkIsGameWin, updatedPlayerAttributes } from "../../common/helper";
 
 // Interface 
 import { CardDeckInterface } from "../../common/interface";
@@ -18,7 +18,7 @@ import classes from "../../styles/game.module.scss";
 const GameBoxContainer = () => {
     const dispatch = useAppDispatch();
     // State selectors
-    const { gameStatus, defaultCardsCount } = useAppSelector(state => state.gameReducer);
+    const { activePlayer, player1, player2, gameStatus, defaultCardsCount } = useAppSelector(state => state.gameReducer);
 
     const [ cardsList, setCardsList ] = useState<CardDeckInterface[] | []>([]);
     const [openedCards, setOpenedCards] = useState<CardDeckInterface[]>([]);
@@ -81,10 +81,10 @@ const GameBoxContainer = () => {
                 });
                 setCardsList(allCards);
                 setOpenedCards([]);
-                dispatch(updatePlayerMoves());
                 checkIsGameWin(allCards, dispatch);
+                updatedPlayerAttributes(activePlayer, player1, player2, true, dispatch);
             } else {
-                dispatch(updatePlayerMoves());
+                updatedPlayerAttributes(activePlayer, player1, player2, false, dispatch);
                 setTimeout(() => resetAllCardsList(), 1000);
             }
         } 
@@ -103,6 +103,7 @@ const GameBoxContainer = () => {
 
     return (
         <Fragment>
+            <PlayerIndicatorTab />
             <div className={classes.cardBoxContainer}>
                 {renderCardsLis()}
                 {(gameStatus === GAME_STATUS.WIN) && <WinComponent />}

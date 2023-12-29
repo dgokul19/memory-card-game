@@ -1,29 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { PLAYER_MODE, GAME_STATUS } from "../constants";
+import { PLAYER_MODE, GAME_STATUS, playerDefaultState, PLAYERS_ID } from "../constants";
+import { PlayerAttribute, DispatchPayload } from '../common/interface'; 
 
 // Define a type for the slice state
-interface gameState {
-  gameStatus : String,
-  playerMode : String,
-  activePlayer: String,
-  playerName : String,
+type gameState = {
+  gameStatus : string,
+  playerMode : string,
+  activePlayer: string,
   defaultCardsCount : Array<string>,
-  matchedPairs : Array<string>,
-  numberOfMoves : number
+  player1 : PlayerAttribute,
+  player2 : PlayerAttribute
 }
 
 // Define the initial state using that type
 const initialState: gameState = {
   gameStatus : GAME_STATUS.ACTIVE,
-  playerMode: PLAYER_MODE.SINGLE_P,
-  activePlayer : '',
-  playerName : '',
+  playerMode: PLAYER_MODE.DOUBLE_P,
+  activePlayer : PLAYERS_ID.PLAYER_1,
   defaultCardsCount : ["RED", "GREEN"],
-  matchedPairs : [],
-  numberOfMoves : 0
+  player1 : playerDefaultState,
+  player2 : {
+    ...playerDefaultState,
+    name : 'Player 2'
+  }
 }
+
 
 export const gameSlice = createSlice({
   name: 'counter',
@@ -32,17 +35,24 @@ export const gameSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     updatePlayerMode: (state, action: PayloadAction<string>) => {
-      state.playerMode = action.payload
+      state.playerMode = action.payload;
     },
     updateGameStatus : (state, action: PayloadAction<string>) => {
-      state.gameStatus = action.payload
+      state.gameStatus = action.payload;
     },
-    updatePlayerMoves : (state ) => {
-        state.numberOfMoves += 1;
+    updatePlayerMoves : (state, action: PayloadAction<DispatchPayload> ) => {
+      const data: DispatchPayload = action.payload;
+      state.activePlayer = data.activePlayer;
+      state.player1 = data.player1;
+      state.player2 = data.player2;
     },
     restartGamePlay: ( state ) => {
-      state.numberOfMoves = 0;
-      state.gameStatus = GAME_STATUS.ACTIVE
+      state.gameStatus = GAME_STATUS.ACTIVE;
+      state.player1 = playerDefaultState;
+      state.player2 = {...playerDefaultState, name: 'Player 2'};
+    },
+    updateActivePlayer : (state, action: PayloadAction<string>) => {
+      state.activePlayer = action.payload;
     }
   },
 })
@@ -51,7 +61,8 @@ export const {
   updatePlayerMoves, 
   updatePlayerMode, 
   updateGameStatus,
-  restartGamePlay
+  restartGamePlay,
+  updateActivePlayer
 } = gameSlice.actions
 
 export default gameSlice.reducer

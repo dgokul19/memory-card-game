@@ -4,6 +4,18 @@ export const GAME_STATUS  = {
     WIN : 'win'
 };
 
+export const PLAYERS_ID = {
+    PLAYER_1 : 'player1',
+    PLAYER_2 : 'player2'
+}
+
+export const playerDefaultState = {
+    name : 'Player 1',
+    numberOfMoves : 0,
+    matchedPairs : 0,
+    timeTaken : ''
+};
+
 export const CARD_NUMBERS = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 // export const CARD_NUMBERS = ["A","2","3"];
 

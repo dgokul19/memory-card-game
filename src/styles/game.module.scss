@@ -57,10 +57,10 @@
                 color: var(--primary-color-05);
                 background-color: var(--primary-color-04);
             }
-            &:last-child{
-                cursor: not-allowed;
-                pointer-events: none;
-            }
+            // &:last-child{
+            //     cursor: not-allowed;
+            //     pointer-events: none;
+            // }
         }
     }
     .playButton{
@@ -123,6 +123,37 @@
             line-height: 45px;
             border-radius: 30px;
             cursor: pointer;
+        }
+    }
+}
+
+// Player Indicator Tabs
+.playerIndicator{
+    position: relative;
+    width: 100%;
+    ul{
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        background-color: var(--primary-color-04);
+        border-radius: 4px;
+        padding: 5px;
+        li{
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            height: 36px;
+            align-items: center;
+            color: var(--primary-color-01);
+            font-weight: 500;
+            cursor: pointer;
+            &.activePlayer{
+                background-color: var(--primary-color-05);
+                color: var(--primary-color-04);
+            }
         }
     }
 }
