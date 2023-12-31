@@ -1,5 +1,5 @@
 import { CardDeckInterface, DispatchPayload, PlayerAttribute } from "./interface";
-import { GAME_STATUS, PLAYERS_ID } from "../constants";
+import { GAME_STATUS, PLAYERS_ID,PLAYER_MODE } from "../constants";
 // Reducer
 import { 
     updateGameStatus, 
@@ -15,8 +15,8 @@ export const checkIsGameWin = (cardList: CardDeckInterface[], dispatcher:Functio
     }
 };
 
-export const updatedPlayerAttributes = (contentPlayer:string, player1:PlayerAttribute, player2:PlayerAttribute,  isMatched:boolean, dispatcher:Function) => {
-    let updatedPlayer = (contentPlayer === PLAYERS_ID.PLAYER_1) ? PLAYERS_ID.PLAYER_2 : PLAYERS_ID.PLAYER_1;
+export const updatedPlayerAttributes = (contentPlayer:string, playerMode:string, player1:PlayerAttribute, player2:PlayerAttribute,  isMatched:boolean, dispatcher:Function) => {
+    let updatedPlayer = (contentPlayer === PLAYERS_ID.PLAYER_1 && playerMode === PLAYER_MODE.DOUBLE_P) ? PLAYERS_ID.PLAYER_2 : PLAYERS_ID.PLAYER_1;
 
     let option: DispatchPayload = {
         activePlayer : isMatched ? contentPlayer : updatedPlayer,

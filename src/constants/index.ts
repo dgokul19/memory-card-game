@@ -7,6 +7,11 @@ export const GAME_STATUS  = {
 export const PLAYERS_ID = {
     PLAYER_1 : 'player1',
     PLAYER_2 : 'player2'
+};
+
+export const GENERAL_CONSTANTS = {
+    INDICATOR : 'indicator',
+    ELEMENT : 'element'
 }
 
 export const playerDefaultState = {

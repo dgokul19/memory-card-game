@@ -16,8 +16,8 @@ type gameState = {
 
 // Define the initial state using that type
 const initialState: gameState = {
-  gameStatus : GAME_STATUS.ACTIVE,
-  playerMode: PLAYER_MODE.DOUBLE_P,
+  gameStatus : GAME_STATUS.IDLE,
+  playerMode: PLAYER_MODE.SINGLE_P,
   activePlayer : PLAYERS_ID.PLAYER_1,
   defaultCardsCount : ["RED", "GREEN"],
   player1 : playerDefaultState,

@@ -7,8 +7,10 @@ import PlayerIndicatorTab from "../PlayerIndicator";
 
 // Utility Imports
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { CARD_NUMBERS, GAME_STATUS, PLAYERS_ID } from "../../constants";
+import { CARD_NUMBERS, GAME_STATUS, PLAYER_MODE } from "../../constants";
 import { checkIsGameWin, updatedPlayerAttributes } from "../../common/helper";
+
+import { updateGameStatus } from "../../reducer/gameReducer";
 
 // Interface 
 import { CardDeckInterface } from "../../common/interface";
@@ -18,9 +20,14 @@ import classes from "../../styles/game.module.scss";
 const GameBoxContainer = () => {
     const dispatch = useAppDispatch();
     // State selectors
-    const { activePlayer, player1, player2, gameStatus, defaultCardsCount } = useAppSelector(state => state.gameReducer);
+    const { activePlayer,
+            playerMode, 
+            player1, player2, 
+            gameStatus, 
+            defaultCardsCount 
+        } = useAppSelector(state => state.gameReducer);
 
-    const [ cardsList, setCardsList ] = useState<CardDeckInterface[] | []>([]);
+    const [cardsList, setCardsList] = useState<CardDeckInterface[] | []>([]);
     const [openedCards, setOpenedCards] = useState<CardDeckInterface[]>([]);
 
     const initializeGame = useCallback(() => {
@@ -56,6 +63,9 @@ const GameBoxContainer = () => {
     const updateTogglingCards = (data: CardDeckInterface) => {
         let tempCards = [...openedCards];
         let allCards = [...cardsList];
+        if(gameStatus === GAME_STATUS.IDLE){
+            dispatch(updateGameStatus(GAME_STATUS.ACTIVE))   
+        }
 
         if(tempCards.length < 2){
             tempCards.push(data);
@@ -82,20 +92,22 @@ const GameBoxContainer = () => {
                 setCardsList(allCards);
                 setOpenedCards([]);
                 checkIsGameWin(allCards, dispatch);
-                updatedPlayerAttributes(activePlayer, player1, player2, true, dispatch);
+                updatedPlayerAttributes(activePlayer, playerMode, player1, player2, true, dispatch);
             } else {
-                updatedPlayerAttributes(activePlayer, player1, player2, false, dispatch);
-                setTimeout(() => resetAllCardsList(), 1000);
+                setTimeout(() => {
+                    updatedPlayerAttributes(activePlayer, playerMode, player1, player2, false, dispatch);
+                    resetAllCardsList()
+                }, 1000);
             }
         } 
         
     };
 
     useEffect(() => {
-        if(gameStatus === GAME_STATUS.ACTIVE){
+        if(gameStatus === GAME_STATUS.IDLE){
             initializeGame();
         }
-    },[defaultCardsCount, gameStatus])
+    },[gameStatus])
 
     const renderCardsLis = () => {
         return cardsList?.map((cards, index) => <CardDeck key={index} content={cards} updateCardAction={updateTogglingCards}/>)
@@ -103,7 +115,6 @@ const GameBoxContainer = () => {
 
     return (
         <Fragment>
-            <PlayerIndicatorTab />
             <div className={classes.cardBoxContainer}>
                 {renderCardsLis()}
                 {(gameStatus === GAME_STATUS.WIN) && <WinComponent />}
