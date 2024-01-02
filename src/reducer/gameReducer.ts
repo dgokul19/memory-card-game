@@ -47,7 +47,7 @@ export const gameSlice = createSlice({
       state.player2 = data.player2;
     },
     restartGamePlay: ( state ) => {
-      state.gameStatus = GAME_STATUS.ACTIVE;
+      state.gameStatus = GAME_STATUS.IDLE;
       state.player1 = playerDefaultState;
       state.player2 = {...playerDefaultState, name: 'Player 2'};
     },
